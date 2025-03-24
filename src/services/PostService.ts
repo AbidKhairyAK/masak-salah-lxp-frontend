@@ -6,10 +6,10 @@ import api from './_api';
 import fetcher from './_fetcher';
 
 
-export function getSinglePost ( id:number ) {
+export function getPostSingle ( id:number ) {
 	return useSWRV <Post> (`/posts/${id}`, fetcher)
 }
 
-export default {
-	getSinglePost,
-};
+export function getPostList () {
+	return useSWRV <Post[]> (`/posts`, fetcher)
+}
