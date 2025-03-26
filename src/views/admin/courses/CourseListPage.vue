@@ -2,7 +2,7 @@
 import { FilePenIcon, PlusIcon, Trash2Icon } from 'lucide-vue-next'
 
 import { getPostList } from '@/services/PostService'
-import { IButton } from '@/components'
+import { IButton, ICardHeader } from '@/components'
 
 const {
 	data: post_list,
@@ -18,18 +18,12 @@ function handleClick( id:string|number ) {
 
 		<Card>
 			<template #title>
-				<section class="flex justify-between items-center mb-4">
-					<div>
-						<h1 class="text-2xl leading-8 text-color font-[325]">
-							Course List
-						</h1>
-						<p class="mt-1 leading-6 text-base font-thin text-muted-color font-normal">
-							List of all created courses on this platform.
-						</p>
-					</div>
-					
-					<IButton label="Create New" :lucide="PlusIcon" />
-				</section>
+				<ICardHeader
+					title="Course List"
+					subtitle="List of available course on this platform."
+				>
+					<IButton label="Create Course" :lucide="PlusIcon" />
+				</ICardHeader>
 			</template>
 
 			<template #content>

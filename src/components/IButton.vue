@@ -7,7 +7,7 @@ import Button from "primevue/button"
 import type { LucideIcon } from "lucide-vue-next";
 
 defineProps<{
-	lucide: LucideIcon
+	lucide?: LucideIcon
 	severity?: string
 }>()
 
@@ -15,7 +15,7 @@ defineProps<{
 
 <template>
 	<Button :severity="severity">
-		<template #icon>
+		<template v-if="lucide" #icon>
 			<component :is="lucide" :class="['w-4 h-4', (severity === undefined || severity === 'primary' ? 'text-primary-contrast' : 'text-primary')]" />
 		</template>
 	</Button>
