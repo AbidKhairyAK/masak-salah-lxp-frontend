@@ -2,34 +2,59 @@
 import { ref } from 'vue';
 
 import AppMenuItem from './AppMenuItem.vue';
+import { Circle, CircleAlert, CircleX, Globe, Home, Lock, LogIn, Pen, Sun, User, UserCheck } from 'lucide-vue-next';
 
 const model = ref([
     {
         label: 'Home',
         items: [
-            { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' },
+            { label: 'Dashboard', icon: Home, to: '/admin' },        
+        ]
+    },
+    {
+        label: 'Pages',
+        items: [
+            {
+                label: 'Landing',
+                icon: Globe,
+                to: ''
+            },
             {
                 label: 'Auth',
-                icon: 'pi pi-fw pi-user',
+                icon: User,
                 items: [
                     {
                         label: 'Login',
-                        icon: 'pi pi-fw pi-sign-in',
-                        to: '/auth/login'
+                        icon: LogIn,
+                        to: ''
                     },
                     {
                         label: 'Error',
-                        icon: 'pi pi-fw pi-times-circle',
-                        to: '/auth/error'
+                        icon: CircleX,
+                        to: ''
                     },
                     {
                         label: 'Access Denied',
-                        icon: 'pi pi-fw pi-lock',
-                        to: '/auth/access'
+                        icon: Lock,
+                        to: ''
                     }
                 ]
             },
-        
+            {
+                label: 'Crud',
+                icon: Pen,
+                to: ''
+            },
+            {
+                label: 'Not Found',
+                icon: CircleAlert,
+                to: ''
+            },
+            {
+                label: 'Empty',
+                icon: Circle,
+                to: ''
+            }
         ]
     },
     
