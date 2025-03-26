@@ -2,7 +2,7 @@
 import Button from "primevue/button"
 
 defineProps({
-	yolo: Object
+	lucide: Object
 })
 
 </script>
@@ -10,7 +10,7 @@ defineProps({
 <template>
 	<Button>
 		<template #icon>
-			<component :is="yolo" class="w-4 h-4" />
+			<component :is="lucide" class="w-4 h-4" />
 		</template>
 	</Button>
 </template>

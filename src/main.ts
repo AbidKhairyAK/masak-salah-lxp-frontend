@@ -1,4 +1,5 @@
 import './styles/main.css'
+import "./styles/layout/layout.scss";
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -15,7 +16,10 @@ app.use(router)
 
 app.use(PrimeVue, {
 	theme: {
-		preset: Theme
+		preset: Theme,
+		options: {
+			darkModeSelector: '.app-dark'
+		}
 	}
 });
 

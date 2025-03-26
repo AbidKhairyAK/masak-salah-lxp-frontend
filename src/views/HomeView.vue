@@ -13,7 +13,7 @@ function handleClick(id) {
 </script>
 
 <template>
-	<main class="p-8">
+	<main>
 
 		<Card>
 			<template #title>
