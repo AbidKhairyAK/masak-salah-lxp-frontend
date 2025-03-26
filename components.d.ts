@@ -13,6 +13,7 @@ declare module 'vue' {
     Column: typeof import('primevue/column')['default']
     DataTable: typeof import('primevue/datatable')['default']
     IButton: typeof import('./src/components/IButton.vue')['default']
+    MeterGroup: typeof import('primevue/metergroup')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SelectButton: typeof import('primevue/selectbutton')['default']

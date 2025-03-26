@@ -5,5 +5,7 @@
 		"vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
 		"package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .prettier*, prettier*, .editorconfig"
 	},
-	"editor.insertSpaces": false
+	"editor.insertSpaces": false,
+	"todo-tree.tree.scanMode": "workspace",
+	"commentAnchors.tagHighlights.enabled": false
 }

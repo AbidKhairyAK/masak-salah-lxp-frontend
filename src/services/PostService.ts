@@ -6,12 +6,16 @@ import api from './_api';
 import fetcher from './_fetcher';
 
 
-export function getPostSingle ( id:number ) {
-	return useSWRV <Post> (`/posts/${id}`, fetcher)
+export function getPostSingle ( id:number ) 
+{
+	const url = `/posts/${id}`
+	return useSWRV <Post> (url, fetcher)
 }
 
-export function getPostList ( page:number = 1, per_page:number = 5 ) {
-	return useSWRV <PostPagination> (`/posts?_page=${page}&_per_page=${per_page}&_embed=user`, fetcher)
+export function getPostList ( page:number = 1, per_page:number = 5 ) 
+{
+	const url = `/posts?_page=${page}&_per_page=${per_page}&_embed=user`
+	return useSWRV <PostPagination> (url, fetcher)
 }
 
 export default { getPostSingle, getPostList }

@@ -11,8 +11,7 @@
 		{ "id": 9, "userId": 1, "title": "Non sit duis enim.", "is_published": true },
 		{ "id": 10, "userId": 2, "title": "Non sit Non enim.", "is_published": true },
 		{ "id": 11, "userId": 1, "title": "Non sit eiusmod enim.", "is_published": false },
-		{ "id": 12, "userId": 1, "title": "Non sit sit enim.", "is_published": true },
-		{ "id": 13, "userId": 1, "title": "Non sit Nisi enim.", "is_published": true }
+		{ "id": 12, "userId": 1, "title": "Non sit sit enim.", "is_published": true }
 	],
 	"users": [
 		{ "id": 1, "email": "bambang@gmail.com" },

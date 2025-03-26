@@ -14,6 +14,8 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
+// FIXME - kyknya si component dari primevue perlu dikasih prefix biar nggak tabrakan dengan component kita atau bawaan html
+
 app.use(PrimeVue, {
 	theme: {
 		preset: Theme,
