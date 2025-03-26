@@ -4,7 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
+		"dev": "concurrently -c \"#93c5fd,#fb7185\" \"vite\" \"json-server dummy.db.json\" --names=vite,server",
 		"build": "run-p type-check \"build-only {@}\" --",
 		"preview": "vite preview",
 		"build-only": "vite build",
@@ -16,6 +16,7 @@
 		"@tailwindcss/typography": "^0.5.16",
 		"@tailwindcss/vite": "^4.0.15",
 		"axios": "^1.8.4",
+		"json-server": "^1.0.0-beta.3",
 		"lucide-vue-next": "^0.483.0",
 		"pinia": "^3.0.1",
 		"primevue": "^4.3.2",

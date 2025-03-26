@@ -1,7 +1,7 @@
 import { definePreset } from '@primeuix/themes';
-import Lara from '@primeuix/themes/lara';
+import Aura from '@primeuix/themes/aura';
 
-const Theme = definePreset(Lara, {
+const Theme = definePreset(Aura, {
 	semantic: {
 		primary: {
 			50: '{fuchsia.50}',

@@ -1,0 +1,21 @@
+{
+	"posts": [
+		{ "id": 1, "userId": 1, "title": "Non sit cupidatat enim.", "is_published": true },
+		{ "id": 2, "userId": 1, "title": "Nisi officia nostrud ipsum voluptate.", "is_published": false },
+		{ "id": 3, "userId": 2, "title": "Do duis eiusmod enim dolore et aliquip fugiat.", "is_published": true },
+		{ "id": 4, "userId": 1, "title": "Non sit ipsum enim.", "is_published": true },
+		{ "id": 5, "userId": 1, "title": "Non sit officia enim.", "is_published": true },
+		{ "id": 6, "userId": 2, "title": "Non sit aliquip enim.", "is_published": false },
+		{ "id": 7, "userId": 1, "title": "Non sit fugiat enim.", "is_published": true },
+		{ "id": 8, "userId": 1, "title": "Non sit voluptate enim.", "is_published": true },
+		{ "id": 9, "userId": 1, "title": "Non sit duis enim.", "is_published": true },
+		{ "id": 10, "userId": 2, "title": "Non sit Non enim.", "is_published": true },
+		{ "id": 11, "userId": 1, "title": "Non sit eiusmod enim.", "is_published": false },
+		{ "id": 12, "userId": 1, "title": "Non sit sit enim.", "is_published": true },
+		{ "id": 13, "userId": 1, "title": "Non sit Nisi enim.", "is_published": true }
+	],
+	"users": [
+		{ "id": 1, "email": "bambang@gmail.com" },
+		{ "id": 2, "email": "siska@gmail.com" }
+	]
+}
