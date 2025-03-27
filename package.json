@@ -4,7 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
+		"dev": "concurrently -c \"#93c5fd,#fb7185\" \"vite\" \"json-server dummy.db.json\" --names=vite,server",
 		"build": "run-p type-check \"build-only {@}\" --",
 		"preview": "vite preview",
 		"build-only": "vite build",
@@ -31,6 +31,8 @@
 		"@types/node": "^22.13.9",
 		"@vitejs/plugin-vue": "^5.2.1",
 		"@vue/tsconfig": "^0.7.0",
+		"concurrently": "^9.1.2",
+		"json-server": "^1.0.0-beta.3",
 		"npm-run-all2": "^7.0.2",
 		"sass": "^1.86.0",
 		"typescript": "~5.8.0",
