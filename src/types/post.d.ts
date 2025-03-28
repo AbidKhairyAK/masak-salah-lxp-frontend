@@ -17,3 +17,8 @@ export interface PostPagination {
 	items	: number,
 	data	: Post[],
 }
+
+export interface PostLogin {
+	email		: string,
+	password	: string
+}
