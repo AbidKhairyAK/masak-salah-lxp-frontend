@@ -48,9 +48,10 @@ const handleLogin = async () => {
                                 <Checkbox v-model="is_remember" id="rememberme" binary class="mr-2"></Checkbox>
                                 <label for="rememberme">Remember me</label>
                             </div>
-                            <span class="font-medium no-underline ml-2 text-right cursor-pointer text-primary">Forgot password?</span>
+                            <span class="font-medium no-underline ml-2 text-right cursor-pointer text-primary" @click="router.push('/auth/forgot-password')">Forgot password?</span>
                         </div>
                         <Button label="Sign In" class="w-full" @click="handleLogin"></Button>
+                        <p class="text-center mt-4">Don't have an account? <span class="text-primary cursor-pointer" @click="router.push('/auth/register')">Register</span></p>
                     </div>
                 </div>
             </div>

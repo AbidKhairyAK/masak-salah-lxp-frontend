@@ -23,10 +23,10 @@ export async function login(email: string, password: string) {
 export async function logout() {
 	try{
 		const url = 'api/logout'
-		await api.post(url);
-	
-		const authStore = useAuthStore()
+		const response = await api.post(url);
+		const authStore = useAuthStore()			
 		authStore.logout();
+		return response.data
 	}catch(error) {
 		console.error('Logout failed:', error);
     	throw error;
@@ -41,4 +41,35 @@ export function getCurrentUser() {
 
 export function getToken() {
 	return localStorage.getItem('token');
+}
+
+export async function register(name: string, email: string, password: string, passwordConfirmation: string) {
+    try {
+        const url = 'api/register';
+        const response = await api.post(url, {
+            name,
+            email,
+            password,
+            password_confirmation: passwordConfirmation
+        });
+		if(response.data.token){
+			const authStore = useAuthStore()
+			authStore.login(response.data);
+		}
+        return response.data;
+    } catch (error) {
+        console.error('Registration failed:', error);
+        throw error;
+    }
+}
+
+export async function sendPasswordResetEmail(email: string) {
+    try {
+        const url = 'api/forgot-password';
+        const response = await api.post(url, { email });
+        return response.data;
+    } catch (error) {
+        console.error('Password reset request failed:', error);
+        throw error;
+    }
 }
