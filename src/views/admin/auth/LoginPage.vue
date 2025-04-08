@@ -1,8 +1,9 @@
 <script setup>
 import { login } from '@/services/AuthService';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-
+const router = useRouter();
 
 const email = ref('');
 const password = ref('');
@@ -11,13 +12,13 @@ const is_loading = ref(false);
 
 const handleLogin = async () => {
     try{
-        loading.value = true
+        is_loading.value = true
         await login(email.value, password.value)
-        router.push('')
+        router.push('/admin')
     }catch (error){
         console.warn(error)
     }finally {
-        loading.value = false
+        is_loading.value = false
     }
 	
 }
