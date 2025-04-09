@@ -16,6 +16,7 @@ declare module 'vue' {
     Divider: typeof import('primevue/divider')['default']
     FloatLabel: typeof import('primevue/floatlabel')['default']
     IButton: typeof import('./src/components/IButton.vue')['default']
+    ICardCourse: typeof import('./src/components/ICardCourse.vue')['default']
     ICardHeader: typeof import('./src/components/ICardHeader.vue')['default']
     InputText: typeof import('primevue/inputtext')['default']
     MeterGroup: typeof import('primevue/metergroup')['default']

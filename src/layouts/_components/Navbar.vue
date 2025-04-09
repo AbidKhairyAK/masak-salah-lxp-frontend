@@ -1,6 +1,5 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth-store';
-import { UserIcon } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import AppProfile from './AppProfile.vue';
@@ -10,7 +9,6 @@ const authStore = useAuthStore()
 const user = computed(() => authStore.currentUser)
 
 const navigateTo = (routeName) => {
-  console.warn('ahri')
   router.push({ name: routeName});
 };
 </script>
@@ -22,14 +20,14 @@ const navigateTo = (routeName) => {
         <!-- Left side: Logo and Explore -->
         <div class="flex items-center">
           <!-- Logo -->
-          <div class="flex-shrink-0 flex items-center cursor-pointer" @click="navigateTo('/')">
+          <RouterLink class="flex-shrink-0 flex items-center cursor-pointer" to="/">
             <img class="h-8 w-auto" src="/logo.png" alt="Udemy" />
-          </div>
+          </RouterLink>
 
           <!-- Explore navigation item -->
           <div class="ml-6 h-full">
             <div class="flex space-x-4 h-full">
-              <Button label="Explore" severity="primary" variant="text" class="custom-button" />
+              <Button label="Explore" severity="primary" variant="text" class="custom-button" v-on:click="navigateTo('public.courses')" />
             </div>
           </div>
         </div>
@@ -63,7 +61,7 @@ const navigateTo = (routeName) => {
             <template v-else>
               <!-- Login and Sign Up buttons -->
               <Button label="Login" severity="primary" variant="outlined"  v-on:click="navigateTo('auth.login')"  />
-              <Button label="Sign Up"  @click="navigateTo('auth.register')" />
+              <Button label="Sign Up" v-on:click="navigateTo('auth.register')" />
             </template>
           </div>
         </div>

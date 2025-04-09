@@ -4,7 +4,7 @@ import { Lock } from 'lucide-vue-next';
 </script>
 
 <template>
-    <div class="flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
+    <div class="flex items-center justify-center min-h-screen overflow-hidden">
         <div class="flex flex-col items-center justify-center">
             <div class="rounded-[56px] p-[0.3rem] bg-gradient-custom">
                 <div class="w-full bg-surface-0 dark:bg-surface-900 py-20 px-8 sm:px-20 flex flex-col items-center" style="border-radius: 53px">
