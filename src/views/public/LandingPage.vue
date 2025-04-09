@@ -13,7 +13,6 @@ import PricingWidget from '@/layouts/_components/PricingWidget.vue';
             <FeaturesWidget />
             <HighlightsWidget />
             <PricingWidget />
-            <FooterWidget />
         </div>
     </div>
 </template>
