@@ -13,6 +13,7 @@ declare module 'vue' {
     Checkbox: typeof import('primevue/checkbox')['default']
     Column: typeof import('primevue/column')['default']
     DataTable: typeof import('primevue/datatable')['default']
+    Divider: typeof import('primevue/divider')['default']
     FloatLabel: typeof import('primevue/floatlabel')['default']
     IButton: typeof import('./src/components/IButton.vue')['default']
     ICardHeader: typeof import('./src/components/ICardHeader.vue')['default']

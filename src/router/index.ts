@@ -12,8 +12,8 @@ import { useAuthStore } from '@/stores/auth-store'
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
-		{ path: '/auth',	name: 'auth',	component:	AuthLayout,		children: auth_routes },
-		{ path: '/admin',	name: 'admin',	component:	AdminLayout,	children: admin_routes, meta: { requires_auth: true } },
+		{ path: '/auth',	name: 'auth',	component:	AuthLayout,		children: auth_routes,	meta: { guest: true} },
+		{ path: '/admin',	name: 'admin',	component:	AdminLayout,	children: admin_routes, meta: { requires_auth: true, required_roles: ['admin', 'instructor'] } },
 		{ path: '/',		name: 'public',	component:	PublicLayout,	children: public_routes },
 	]
 })
@@ -30,7 +30,19 @@ router.beforeEach(async (to, from, next) => {
 	if (to.meta.requires_auth && !authStore.isAuthenticated) {
 		next({ name: 'auth.login', query: { redirect: to.fullPath } });
 		return;
-	}	
+	}
+
+	// Cek apakah halaman membutuhkan role tertentu
+	if (to.meta.required_roles) {
+		const requiredRoles: string[] = to.meta.required_roles as string[];
+		const userRoles: string[] = authStore.user?.roles ?? [];
+		const hasRequiredRole = userRoles.some(role => requiredRoles.includes(role));
+	
+		if (!hasRequiredRole) {
+			next({ name: 'public.access_denied' });
+			return;
+		}
+	}
 
 	next()
 })
