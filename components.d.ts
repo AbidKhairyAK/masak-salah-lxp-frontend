@@ -21,6 +21,8 @@ declare module 'vue' {
     IButton: typeof import('./src/components/IButton.vue')['default']
     ICardCourse: typeof import('./src/components/ICardCourse.vue')['default']
     ICardHeader: typeof import('./src/components/ICardHeader.vue')['default']
+    IErrorMessage: typeof import('./src/components/IErrorMessage.vue')['default']
+    IftaLabel: typeof import('primevue/iftalabel')['default']
     InputText: typeof import('primevue/inputtext')['default']
     Message: typeof import('primevue/message')['default']
     MeterGroup: typeof import('primevue/metergroup')['default']

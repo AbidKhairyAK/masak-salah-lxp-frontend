@@ -1,23 +1,27 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { CheckIcon, ChevronLeftIcon } from 'lucide-vue-next'
 
-import IButton from '@/components/IButton.vue'
 import useForm from '@/composables/useForm'
 import { createCourse } from '@/services/CourseService'
+import { IErrorMessage, IButton } from '@/components'
 
 const instructor_options = [
-	{ name: 'yudhoyono',	id: 1 },
+	{ name: 'yudhoyono', id: 1 },
 ]
 
-const { form, errors, submitForm } = useForm ({
+const { form, errors, submitForm, isLoading } = useForm ({
 	title			: '',
 	instructor_id	: '',
 	caption			: '',
 	description		: ''
 })
 
+const router = useRouter()
+
 async function onSubmit () {
 	await createCourse(form)
+	router.push('/admin/courses')
 }
 </script>
 
@@ -39,68 +43,61 @@ async function onSubmit () {
 					class="w-full max-w-4xl grid gap-5"
 					@submit.prevent="submitForm(onSubmit)"
 				>
-					<FloatLabel variant="in">
+					<IftaLabel>
 						<InputText
 							v-model="form.title"
-							class="w-full" />
-						<label>
-							Course Title
-						</label>
-						<Message v-if="errors?.title" size="small" severity="error" variant="simple">
-							{{ errors?.title }}
-						</Message>
-					</FloatLabel>
+							:invalid="!!errors?.title"
+							class="w-full"
+						/>
+						<IErrorMessage :value="errors?.title" />
+						<label>Course Title</label>
+					</IftaLabel>
 
-					<FloatLabel variant="in">
+					<IftaLabel>
 						<Select
 							v-model="form.instructor_id"
 							class="w-full" 
+							:invalid="!!errors?.instructor_id"
 							:options="instructor_options" 
 							option-label="name" 
-							option-value="id" />
-						<label>
-							Instructor
-						</label>
-						<Message v-if="errors?.instructor_id" size="small" severity="error" variant="simple">
-							{{ errors?.instructor_id }}
-						</Message>
-					</FloatLabel>
+							option-value="id" 
+						/>
+						<IErrorMessage :value="errors?.instructor_id" />
+						<label>Instructor</label>
+					</IftaLabel>
 					
-					<FloatLabel variant="in">
+					<IftaLabel>
 						<InputText
 							v-model="form.caption"
-							class="w-full" />
-						<label>
-							Caption
-						</label>
-						<Message v-if="errors?.caption" size="small" severity="error" variant="simple">
-							{{ errors?.caption }}
-						</Message>
-					</FloatLabel>
+							:invalid="!!errors?.caption"
+							class="w-full" 
+						/>
+						<IErrorMessage :value="errors?.caption" />
+						<label>Caption</label>
+					</IftaLabel>
 
-					<FloatLabel variant="in">
+					<IftaLabel>
 						<Textarea
 							v-model="form.description"
+							:invalid="!!errors?.description"
+							:rows="5" 
 							class="w-full"
-							:rows="5" />
-						<label>
-							Description
-						</label>
-						<Message v-if="errors?.description" size="small" severity="error" variant="simple">
-							{{ errors?.description }}
-						</Message>
-					</FloatLabel>
+						/>
+						<IErrorMessage :value="errors?.description" />
+						<label>Description</label>
+					</IftaLabel>
 
-					<IButton type="submit" label="Submit" :lucide="CheckIcon" size="large" class="w-48 shadow" />
+					<IButton 
+						type="submit" 
+						label="Submit" 
+						size="large" 
+						class="w-48 shadow" 
+						:lucide="CheckIcon"
+						:loading="isLoading"
+					/>
 				</form>
 			</template>
 		</Card>
 
 	</main>
 </template>
-
-<style>
-.p-message {
-	margin-top: 0.5rem;
-}
-</style>
