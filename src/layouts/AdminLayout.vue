@@ -57,13 +57,13 @@ function isOutsideClicked(event) {
 
 <template>
     <div class="layout-wrapper" :class="containerClass">
-        <AppTopbar></AppTopbar>
-        <AppSidebar></AppSidebar>
+        <AppTopbar/>
+        <AppSidebar/>
         <div class="layout-main-container">
             <div class="layout-main">
-                <RouterView></RouterView>
+                <RouterView />
             </div>
-            <AppFooter></AppFooter>
+            <!-- <AppFooter/> -->
         </div>
         <div class="layout-mask animate-fadein"></div>
     </div>
