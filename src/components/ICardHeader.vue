@@ -13,7 +13,7 @@ defineProps<{
 			<h1 :class="['text-2xl leading-8 text-color font-[325]', titleClass]">
 				{{ title }}
 			</h1>
-			<p :class="['mt-1 leading-6 text-base font-thin text-muted-color font-normal', subtitleClass]">
+			<p :class="['mt-1 leading-6 text-base font-thin text-muted-color', subtitleClass]">
 				{{ subtitle }}
 			</p>
 		</div>
