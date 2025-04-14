@@ -31,3 +31,10 @@ export interface CourseCard {
 	practice: number;
 	instructor: string;
   }
+
+export interface CoursePayload {
+  instructor_id : string | number,
+  title         : string,
+  caption       : string,
+  description   : string
+}

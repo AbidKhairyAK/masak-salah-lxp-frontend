@@ -3,7 +3,7 @@ import api from "./_api";
 
 export async function login(email: string, password: string) {
 	try {	
-		const url = 'api/login'
+		const url = '/login'
 		const response = await api.post(url, {
 			email,
 			password
@@ -22,7 +22,7 @@ export async function login(email: string, password: string) {
 
 export async function logout() {
 	try{
-		const url = 'api/logout'
+		const url = '/logout'
 		const response = await api.post(url);
 		const authStore = useAuthStore()			
 		authStore.logout();
@@ -45,7 +45,7 @@ export function getToken() {
 
 export async function register(name: string, email: string, password: string, passwordConfirmation: string) {
     try {
-        const url = 'api/register';
+        const url = '/register';
         const response = await api.post(url, {
             name,
             email,
@@ -65,7 +65,7 @@ export async function register(name: string, email: string, password: string, pa
 
 export async function sendPasswordResetEmail(email: string) {
     try {
-        const url = 'api/forgot-password';
+        const url = '/forgot-password';
         const response = await api.post(url, { email });
         return response.data;
     } catch (error) {

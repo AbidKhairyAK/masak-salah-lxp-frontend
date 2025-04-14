@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { FilePenIcon, PlusIcon, Trash2Icon } from 'lucide-vue-next'
 
-import { getPostList } from '@/services/PostService'
+import { getCourseList } from '@/services/CourseService'
 import { IButton, ICardHeader } from '@/components'
 
 const {
-	data: post_list,
-} = getPostList()
+	data: course_list,
+} = getCourseList()
 
 function handleClick( id:string|number ) {
-	
+	console.log( id )
 }
 </script>
 
@@ -22,15 +22,17 @@ function handleClick( id:string|number ) {
 					title="Course List"
 					subtitle="List of available course on this platform."
 				>
-					<IButton label="Create Course" :lucide="PlusIcon" />
+					<RouterLink to="/admin/courses/form">
+						<IButton label="Create Course" :lucide="PlusIcon" />
+					</RouterLink>
 				</ICardHeader>
 			</template>
 
 			<template #content>
-				<DataTable id="my-table" :value="post_list?.data" class="border border-surface rounded-border	overflow-hidden">
+				<DataTable id="my-table" :value="course_list" class="border border-surface rounded-border	overflow-hidden">
 					<Column field="id" header="ID" body-class="w-[50px]" />
 					<Column field="title" header="Title" />
-					<Column field="user.email" header="User" />
+					<Column field="instructor_id" header="Instructor" />
 					<Column header="Action" body-class="w-[110px]">
 						<template #body="{ data }">
 							<section class="flex gap-2">
