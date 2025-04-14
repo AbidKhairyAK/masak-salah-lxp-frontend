@@ -1,5 +1,5 @@
 <template>
-    <div class="py-16 px-6 mt-20 bg-gray-900">
+    <div class="py-16 px-6 bg-gray-900">
         <div class="grid grid-cols-12 gap-4 px-16">
             <div class="col-span-12 md:col-span-2">
                 <a class="flex flex-wrap items-center justify-center md:justify-start md:mb-0 mb-4 cursor-pointer">
