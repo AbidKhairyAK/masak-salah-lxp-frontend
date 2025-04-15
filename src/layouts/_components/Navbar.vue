@@ -50,10 +50,7 @@ const navigateTo = (routeName) => {
                     leaveActiveClass: 'animate-fadeout',
                     hideOnOutsideClick: true
                   }">
-                  <div
-                    class="h-10 w-10 rounded-full bg-primary flex items-center justify-center border border-gray-300 cursor-pointer">
-                    <span class="text-lg font-medium text-white">{{ user?.name?.charAt(0)?.toUpperCase() }}</span>
-                  </div>
+                  <Avatar label="P" shape="circle" class="!h-10 !w-10 !bg-primary-100 !text-primary-500 font-bold"/>
                 </Button>
                 <AppProfile class="mt-3" />
               </div>

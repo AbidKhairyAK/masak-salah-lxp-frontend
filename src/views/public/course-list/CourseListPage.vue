@@ -85,7 +85,12 @@ const courses = ref([
 		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 			<div v-for="course in courses" :key="course.id" class="mb-4">
 				<RouterLink to="/course/detail/2">
-					<ICardCourse :course="course" />
+					<ICardCourse 
+						:image="course.image" 
+						:title="course.title" 
+						:instructor="course.instructor"
+						:lessons="course.lessons" 
+						:practice="course.practice" />
 				</RouterLink>
 			</div>
 		</div>

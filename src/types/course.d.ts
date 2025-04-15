@@ -6,6 +6,14 @@ interface Instructor {
 interface Chapter {
   id: number;
   title?: string;
+  topics?: Topic[];
+}
+
+interface Topic {
+  id: number;
+  title?: string;
+  sort_order?: number;
+  type: string;
 }
 
 export interface Course {

@@ -9,6 +9,7 @@
 
 @import "tailwindcss";
 @import "tailwindcss-primeui";
+@plugin '@tailwindcss/typography';
 
 /* FIXME - cari cara yg lebih proper untuk mengganti app wide font */
 html, body {
