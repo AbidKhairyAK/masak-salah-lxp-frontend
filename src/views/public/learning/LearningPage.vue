@@ -1,25 +1,22 @@
 <script setup lang="ts">
 import { Circle, ListIcon } from 'lucide-vue-next';
-import { ref, onMounted, onUnmounted } from 'vue';
-import VideoPage from './VideoPage.vue';
-import PdfPage from './PdfPage.vue';
-import ArticlePage from './ArticlePage.vue';
-import { getLearning } from '@/services/LearningService';
-import IButton from '@/components/IButton.vue';
+import { getCourseStructure } from '@/services/CourseService';
+import { RouterLink, useRoute } from 'vue-router';
+
+
+const route = useRoute()
+const course_id = Number(route.params.id)
 
 const {
     data: learning
-} = getLearning()
-
+} = getCourseStructure(course_id)
 
 </script>
 <template>
 	<div class="flex sticky gap-8 p-8">
 		<!-- Main content area -->
 		<main class="flex-1 max-h-full">
-			<PdfPage :url="learning?.lesson.pdf.pdf_url" v-if="learning?.lesson.pdf"/>
-			<ArticlePage :content="learning?.lesson.article.content" v-if="learning?.lesson.article"/>
-			<VideoPage :url="learning?.lesson.video.video_url" :title="learning?.topic.title" v-if="learning?.lesson.video"/>
+			<RouterView />
 		</main>
 
 		<aside class="w-1/4 min-h-screen bg-gray-800 rounded-2xl transition-all duration-300 text-white flex flex-col overflow-y-auto">
@@ -30,16 +27,16 @@ const {
 
 			<div class="flex-1 overflow-y-auto">
 				<Accordion :value="[0]" multiple class="px-3">
-					<AccordionPanel v-for="(chapter, index) in learning?.course.chapters" :key="index" :value="index" class="!bg-gray-800 !border-none mt-3">
+					<AccordionPanel v-for="(chapter, index) in learning" :key="index" :value="index" class="!bg-gray-800 !border-none mt-3">
 						<AccordionHeader class="!bg-gray-800 !text-white">{{ chapter.title }}</AccordionHeader>
 						<AccordionContent class="mx-2 !border-b !border-gray-600" >
 							<div class="bg-gray-800 text-white">
 								<div v-for="(topic, topicIndex) in chapter.topics" :key="topicIndex"
 									class="py-2 flex justify-between items-center">
-									<a class="flex items-center cursor-pointer hover:bg-gray-700 p-2 rounded-xl w-full">
+									<RouterLink :to="{ name: 'public.course.lesson', params: { lesson_id: topic.id}}" class="flex items-center cursor-pointer hover:bg-gray-700 p-2 rounded-xl w-full">
 										<Circle class="mr-2 w-5 h-5" stroke-width="1.5" />
 										<span>{{ topic.title }}</span>
-									</a>
+									</RouterLink>
 								</div>
 							</div>
 						</AccordionContent>

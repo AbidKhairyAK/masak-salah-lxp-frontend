@@ -1,19 +1,22 @@
+import type { Lesson } from "./lesson";
+
 interface Instructor {
   id: number;
   name: string;
 }
 
-interface Chapter {
+export interface Chapter {
   id: number;
   title?: string;
   topics?: Topic[];
 }
 
-interface Topic {
+export interface Topic {
   id: number;
   title?: string;
   sort_order?: number;
-  type: string;
+  type?: string;
+  lesson?: Lesson;
 }
 
 export interface Course {
