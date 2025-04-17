@@ -38,7 +38,7 @@ const navigateTo = (routeName) => {
             <!-- Check if user is logged in -->
             <template v-if="user">
               <!-- My Learning -->
-              <Button label="My Learning" severity="primary" variant="text" class="custom-button " />
+              <Button label="My Learning" severity="primary" variant="text" class="custom-button " v-on:click="navigateTo('public.my_learning')" />
               <!-- User Avatar -->
               <div class="relative">
                 <Button label="Profile" severity="primary" variant="text" class="!px-4 h-full"
@@ -50,7 +50,7 @@ const navigateTo = (routeName) => {
                     leaveActiveClass: 'animate-fadeout',
                     hideOnOutsideClick: true
                   }">
-                  <Avatar label="P" shape="circle" class="!h-10 !w-10 !bg-primary-100 !text-primary-500 font-bold"/>
+                  <Avatar :label="user.name[0]" shape="circle" class="!h-10 !w-10 !bg-primary-100 !text-primary-500 font-bold"/>
                 </Button>
                 <AppProfile class="mt-3" />
               </div>

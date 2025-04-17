@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { CourseCard } from '@/types/course';
 import { defineProps } from 'vue';
 
 defineProps<{
@@ -13,7 +12,7 @@ defineProps<{
 
 <template>
 	<Card
-		class="h-full shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-1 !rounded-xl flex flex-col">
+		class="h-full transition-all duration-200 transform hover:-translate-y-1 !rounded-xl">
 		<template #header>
 			<div class="relative">
 				<img :src="image" :alt="title" class="w-full h-48 object-cover rounded-t-xl" />
@@ -21,8 +20,8 @@ defineProps<{
 		</template>
 		<template #title>
 			<div class="flex justify-between text-sm text-gray-500 mb-2">
-				<span>{{ lessons }}</span>
-				<span>{{ practice }}</span>
+				<span>{{ lessons }} lessons</span>
+				<span>{{ practice }} practices</span>
 			</div>
 			<h3 class="text-xl font-bold mt-3">{{ title }}</h3>
 		</template>

@@ -11,6 +11,9 @@ const public_routes: RouteRecordRaw[] = [
 			{ path: 'lesson/:lesson_id', name: 'public.course.lesson', component: () => import('@/views/public/learning/LessonPage.vue') },
 		],
 		meta: { requires_auth: true}
+	},
+	{ path: '/my-learning', 		name: 'public.my_learning',			component: () => import('@/views/public/my-learning/MyLearningPage.vue'),
+		meta: { requires_auth: true}
 	}
 	
 ]

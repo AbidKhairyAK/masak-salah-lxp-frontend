@@ -1,8 +1,6 @@
 <script setup>
-import { ref } from 'vue';
 import Button from 'primevue/button';
 import Accordion from 'primevue/accordion';
-import AccordionTab from 'primevue/accordiontab';
 import { NotebookTextIcon } from 'lucide-vue-next';
 import { useRoute } from 'vue-router';
 import { getCourseDetail } from '@/services/CourseService';
@@ -32,7 +30,9 @@ const {
                         </p>
                     </div>
                     <div>
-                        <Button label="Start Course" class="text-lg !px-4" />
+                        <router-link :to="{name: 'public.course.lesson', params: { id: course_id, lesson_id: course.chapters[0].topics[0].id }}" class="p-button text-lg font-bold !px-4">
+                            Start Course
+                        </router-link>
                     </div>
 
                 </div>
