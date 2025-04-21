@@ -1,5 +1,5 @@
 <script setup>
-import { Home, LogOut } from 'lucide-vue-next';
+import { Home, LogOut, User } from 'lucide-vue-next';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth-store';
@@ -10,9 +10,13 @@ const authStore = useAuthStore();
 
 const menuItems = ref([
     { 
+        label: 'Profile', 
+        icon: User, 
+        command: () => router.push('/profile/dummy@mail.com')
+    },
+    { 
         label: 'Dashboard', 
         icon: Home, 
-        to: '/admin',
         command: () => router.push('/admin')
     },
     { 

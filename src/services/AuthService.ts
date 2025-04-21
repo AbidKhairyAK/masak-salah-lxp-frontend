@@ -23,9 +23,9 @@ export async function login(email: string, password: string) {
 export async function logout() {
 	try{
 		const url = '/logout'
-		const response = await api.post(url);
 		const authStore = useAuthStore()			
 		authStore.logout();
+		const response = await api.post(url);
 		return response.data
 	}catch(error) {
 		console.error('Logout failed:', error);

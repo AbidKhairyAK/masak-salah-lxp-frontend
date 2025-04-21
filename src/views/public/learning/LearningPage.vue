@@ -3,6 +3,7 @@ import { Circle, ListIcon, Menu, X } from 'lucide-vue-next';
 import { getCourseStructure } from '@/services/CourseService';
 import { RouterLink, useRoute } from 'vue-router';
 import { computed, ref } from 'vue';
+import IButton from '@/components/IButton.vue';
 
 const route = useRoute()
 const course_id = Number(route.params.id)
@@ -28,6 +29,26 @@ const {
 
         <!-- Main content area -->
         <main class="flex-1 max-h-full">
+            <Card class="mb-6 !shadow-none">
+                <template #content>
+                    <div class="flex gap-2">
+                        <IButton
+                            label="Prev"
+                            severity="contrast"
+                            class="!bg-gray-800"
+                        />
+                        <IButton
+                        label="Next"
+                        severity="contrast"
+                        class="!bg-gray-800"
+                        />
+                        <IButton
+                            label="Complete"
+                            severity="contrast"
+                        />
+                    </div>
+                </template>
+            </Card>
             <RouterView />
         </main>
 

@@ -30,8 +30,11 @@ const {
                         </p>
                     </div>
                     <div>
-                        <router-link :to="{name: 'public.course.lesson', params: { id: course_id, lesson_id: course.chapters[0].topics[0].id }}" class="p-button text-lg font-bold !px-4">
+                        <!-- <router-link :to="{name: 'public.course.lesson', params: { id: course_id, lesson_id: course.chapters[0].topics[0].id }}" class="p-button text-lg font-bold !px-4">
                             Start Course
+                        </router-link> -->
+                        <router-link :to="{name: 'public.redeem_access_code', params: { id: course_id }}" class="p-button text-lg font-bold !px-4">
+                            Enroll Course
                         </router-link>
                     </div>
 

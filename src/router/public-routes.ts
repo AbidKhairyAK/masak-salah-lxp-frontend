@@ -14,7 +14,11 @@ const public_routes: RouteRecordRaw[] = [
 	},
 	{ path: '/my-learning', 		name: 'public.my_learning',			component: () => import('@/views/public/my-learning/MyLearningPage.vue'),
 		meta: { requires_auth: true}
-	}
+	},
+	{ path: '/redeem-access-code/course/:id', name: 'public.redeem_access_code', component: () => import('@/views/public/redeem-access-code/RedeemAccessCodePage.vue'),
+		meta: { requires_auth: true}
+	},
+	{ path: '/profile/:email', name: 'public.profile', component: () => import('@/views/public/profile/ProfilePage.vue')}
 	
 ]
 
