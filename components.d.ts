@@ -31,6 +31,7 @@ declare module 'vue' {
     MeterGroup: typeof import('primevue/metergroup')['default']
     PanelMenu: typeof import('primevue/panelmenu')['default']
     Password: typeof import('primevue/password')['default']
+    Popover: typeof import('primevue/popover')['default']
     ProgressBar: typeof import('primevue/progressbar')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -47,5 +48,6 @@ declare module 'vue' {
   export interface ComponentCustomProperties {
     Ripple: typeof import('primevue/ripple')['default']
     StyleClass: typeof import('primevue/styleclass')['default']
+    Tooltip: typeof import('primevue/tooltip')['default']
   }
 }

@@ -1,4 +1,5 @@
 import type { Lesson } from "./lesson";
+import type { Practice } from "./practice";
 
 interface Instructor {
   id: number;
@@ -17,6 +18,7 @@ export interface Topic {
   sort_order?: number;
   type?: string;
   lesson?: Lesson;
+  practice?: Practice;
 }
 
 export interface Course {

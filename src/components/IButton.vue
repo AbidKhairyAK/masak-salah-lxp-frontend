@@ -9,6 +9,7 @@ import type { LucideIcon } from "lucide-vue-next";
 defineProps<{
 	lucide?: LucideIcon
 	severity?: string
+	lucideClass?: string
 }>()
 
 </script>
@@ -16,7 +17,7 @@ defineProps<{
 <template>
 	<Button :severity="severity">
 		<template v-if="lucide" #icon>
-			<component :is="lucide" :class="['w-4 h-4', (severity === undefined || severity === 'primary' ? 'text-primary-contrast' : 'text-primary')]" />
+			<component :is="lucide" :class="['w-4 h-4', (severity === undefined || severity === 'primary' ? 'text-primary-contrast' : 'text-primary'), lucideClass]" />
 		</template>
 	</Button>
 </template>

@@ -20,7 +20,8 @@ defineProps<{
 		></iframe>
 	  </div>
 	  
-	  <div class="rounded-2xl bg-white p-4">
+	  <Card class="!shadow-none">
+		<template #content>
 		  <Tabs value="0">
 			  <TabList>
 				  <Tab value="0">Overview</Tab>
@@ -38,6 +39,7 @@ defineProps<{
 				  </TabPanel>
 			  </TabPanels>
 		  </Tabs>
-	  </div>
+	  </template>
+	  </Card>
 	</div>
 </template>
