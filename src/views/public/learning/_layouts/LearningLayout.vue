@@ -1,20 +1,19 @@
 <script setup>
 import { BotIcon, Circle, ListIcon, Menu, X } from 'lucide-vue-next';
-import { getCourseStructure } from '@/services/CourseService';
-import { RouterLink, useRoute } from 'vue-router';
+import { getCourseStructure, getTopicNav } from '@/services/CourseService';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { computed, ref } from 'vue';
 import IButton from '@/components/IButton.vue';
 import { useLessonStore } from '@/stores/lesson-store';
 
 const lessonStore = useLessonStore()
-
-// Sidebar
+const router = useRouter()
+//=== Sidebar ===
 const route = useRoute()
 const course_id = Number(route.params.id)
 const curr_topic_id = computed(() => route.params.lesson_id)
 
 const is_sidebar_open = ref(false)
-
 const toggleSidebar = () => {
     is_sidebar_open.value = !is_sidebar_open.value
 }
@@ -22,25 +21,32 @@ const toggleSidebar = () => {
 const {
     data: learning
 } = getCourseStructure(course_id)
+//================
 
 
-// Cindy Popover
-const youtubeRegex = /(?:youtube(?:-nocookie)?\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i;
-const youtube_id = computed(() => {
-    const url = lessonStore.video_url;
-    const match = url.match(youtubeRegex);
-    return match ? match[1] : null;
-});
-const is_cindy_open = ref(false);
-const iframe_src = computed(() => {
-    return youtube_id.value
-        ? `https://cindy.prodemy.id?video_id=${youtube_id.value}`
+//=== Cindy Popover ===
+const getIframeSrc = (video_url) => {
+    const youtubeRegex = /(?:youtube(?:-nocookie)?\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i;
+    const match = video_url.match(youtubeRegex);
+    const youtube_id = match ? match[1] : null;
+
+    return youtube_id
+        ? `https://cindy.prodemy.id?video_id=${youtube_id}`
         : '';
-});
+}
 
+const iframe_src = computed(() => {
+    return getIframeSrc(lessonStore.video_url)
+})
+
+const is_cindy_open = ref(false);
 const toggleCindy = () => {
     is_cindy_open.value = !is_cindy_open.value
 }
+//=====================
+
+//=== Nav Button ===
+const { data: nav } = getTopicNav(curr_topic_id)
 
 </script>
 
@@ -58,8 +64,10 @@ const toggleCindy = () => {
             <Card class="mb-6 !shadow-none">
                 <template #content>
                     <div class="flex gap-2">
-                        <IButton label="Prev" severity="contrast" class="!bg-gray-800" />
-                        <IButton label="Next" severity="contrast" class="!bg-gray-800" />
+                        <IButton label="Prev" severity="contrast" class="!bg-gray-800" v-if="nav?.prev_topic_id"
+                            @click="router.push({ name: 'public.course.lesson', params: { lesson_id: nav?.prev_topic_id } })" />
+                        <IButton label="Next" severity="contrast" class="!bg-gray-800" v-if="nav?.next_topic_id"
+                            @click="router.push({ name: 'public.course.lesson', params: { lesson_id: nav?.next_topic_id } })" />
                         <IButton label="Complete" severity="contrast" />
                     </div>
                 </template>
@@ -109,15 +117,14 @@ const toggleCindy = () => {
         <!-- Cindy Popover -->
         <div class="fixed z-50 bottom-6 right-4 md:right-8 lg:right-12">
             <div class="flex flex-col items-end gap-2">
-                <div
-                    :class="['bg-white rounded-lg w-screen md:w-96 lg:w-[500px] h-[420px] lg:h-[500px] overflow-hidden p-4', 
+                <div :class="['bg-white rounded-lg w-screen md:w-96 lg:w-[500px] h-[420px] lg:h-[500px] overflow-hidden p-4',
                     'transition-all duration-300 ease-in-out transform shadow-2xl',
-                     is_cindy_open ? 'block' : 'hidden']">
+                    is_cindy_open ? 'block' : 'hidden']">
                     <iframe :src="iframe_src" class="w-full h-full"></iframe>
                 </div>
 
                 <IButton @click="toggleCindy" class="!w-15 !h-15" v-tooltip="'Ask Cindy'" :lucide="BotIcon" rounded
-                    lucideClass="h-8 w-8" raised/>
+                    lucideClass="h-8 w-8" raised />
             </div>
         </div>
     </div>

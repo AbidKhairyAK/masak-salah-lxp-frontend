@@ -45,4 +45,15 @@ export function getTopicContent(id: ComputedRef<number>) {
   return useSWRV<Topic>(url, fetcher);
 }
 
+export function getTopicNav(id: ComputedRef<number>) {
+  const resolvedId = computed(() => {
+    if (isRef(id)) return id.value;
+    return id;
+  });
+  
+  const url = computed(() => `/topics/${resolvedId.value}/navigation`);
+  
+  return useSWRV<Topic>(url, fetcher);
+}
+
 export default { getCourseList, getCourseDetail, createCourse, getCourseStructure };

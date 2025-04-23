@@ -11,6 +11,7 @@ import { useLessonStore } from '@/stores/lesson-store';
 
 const route = useRoute()
 const lessonStore = useLessonStore()
+const course_id = Number(route.params.id)
 
 const {
   data: topic
@@ -18,19 +19,19 @@ const {
 
 
 watch(topic, (newVal) => {
-  if (newVal?.lesson) {
+
     lessonStore.setLessonData({
-      lesson_id: newVal.lesson.id,
-      type: newVal.lesson.type,
-      video_url: newVal.lesson.video?.video_url || ''
+      topic_id: newVal?.id || 0,
+      lesson_id: newVal?.lesson?.id || 0,
+      type: newVal?.lesson?.type || '',
+      video_url: newVal?.lesson?.video?.video_url || ''
     });
-  }
 });
 
 </script>
 <template>
 	<div>
-		<StartSinglePracticePage v-if="topic?.practice" />
+		<StartSinglePracticePage :practiceId="topic?.practice?.id" :courseId="course_id" v-if="topic?.practice" />
 		<PdfLessonPage :url="topic?.lesson?.pdf.pdf_url" v-if="topic?.lesson?.pdf" />
 		<ArticleLessonPage :content="topic?.lesson?.article.content" v-if="topic?.lesson?.article" />
 		<VideoLessonPage :url="topic?.lesson?.video.video_url" :title="topic?.title ?? ''" v-if="topic?.lesson?.video" />

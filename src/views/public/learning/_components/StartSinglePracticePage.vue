@@ -1,5 +1,8 @@
 <script setup lang="ts">
-
+defineProps<{
+	practiceId: number;
+	courseId: number;
+}>()
 const results = [
 	{
 		date: '2025-04-01',
@@ -40,7 +43,9 @@ const results = [
 				<p>Pastikan Anda siap sebelum memulai! Klik tombol di bawah untuk mulai ujian.</p>
 				
 			</div>
-			<IButton label="Start Practice" class="my-8 !p-4" severity="contrast"/>
+			<Button asChild v-slot="slotProps" severity="contrast">
+				<RouterLink :to="{name: 'practice.single_choice', params: { courseId: courseId, practiceId: practiceId  } }" :class="[slotProps.class, 'my-8 !p-4']">Start Practice</RouterLink>
+			</Button>
 			<div>
 				<h1 class="font-bold text-2xl text-gray-800 mb-8">History</h1>
 				<DataTable :value="results" class="border border-surface rounded-border	overflow-hidden" id="my-table">
