@@ -4,6 +4,8 @@ import Accordion from 'primevue/accordion';
 import { NotebookTextIcon } from 'lucide-vue-next';
 import { useRoute } from 'vue-router';
 import { getCourseDetail } from '@/services/CourseService';
+import noImage from '@/assets/images/noimage.jpg';
+
 
 const route = useRoute();
 const course_id = route.params.id
@@ -39,10 +41,9 @@ const {
                     </div>
 
                 </div>
-
                 <div class="flex-1">
                     <div class="relative w-full aspect-[3/2] rounded-lg shadow-lg overflow-hidden">
-                        <img src="/images/course/original_1.webp" alt="Azure Course"
+                        <img :src="noImage" alt="Azure Course"
                             class="absolute w-full h-full object-cover object-center" />
                     </div>
                 </div>

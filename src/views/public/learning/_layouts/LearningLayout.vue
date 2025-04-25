@@ -5,6 +5,7 @@ import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { computed, ref } from 'vue';
 import IButton from '@/components/IButton.vue';
 import { useLessonStore } from '@/stores/lesson-store';
+import ISidebar from '@/components/ISidebar.vue';
 
 const lessonStore = useLessonStore()
 const router = useRouter()
@@ -52,23 +53,22 @@ const { data: nav } = getTopicNav(curr_topic_id)
 
 <template>
     <div class="relative flex gap-8 p-8">
-        <!-- Mobile menu button -->
-        <button @click="toggleSidebar"
-            class="fixed top-20 right-0 z-50 lg:hidden bg-gray-800 text-white p-3 rounded-l-full shadow-lg">
-            <ListIcon v-if="!is_sidebar_open" class="w-6 h-6" />
-            <X v-else class="w-6 h-6" />
-        </button>
-
         <!-- Main content area -->
         <main class="flex-1 max-h-full">
             <Card class="mb-6 !shadow-none">
                 <template #content>
-                    <div class="flex gap-2">
-                        <IButton label="Prev" severity="contrast" class="!bg-gray-800" v-if="nav?.prev_topic_id"
-                            @click="router.push({ name: 'public.course.lesson', params: { lesson_id: nav?.prev_topic_id } })" />
-                        <IButton label="Next" severity="contrast" class="!bg-gray-800" v-if="nav?.next_topic_id"
-                            @click="router.push({ name: 'public.course.lesson', params: { lesson_id: nav?.next_topic_id } })" />
-                        <IButton label="Complete" severity="contrast" />
+                    <div class="flex justify-between gap-2">
+                        <div class="flex gap-2">
+                            <Button label="Previous" severity="secondary" outlined v-if="nav?.prev_topic_id"
+                                @click="router.push({ name: 'public.course.lesson', params: { lesson_id: nav?.prev_topic_id } })" />
+                            <Button label="Next" severity="secondary" outlined v-if="nav?.next_topic_id"
+                                @click="router.push({ name: 'public.course.lesson', params: { lesson_id: nav?.next_topic_id } })" />
+                        </div>
+                        <div class="flex gap-2">
+                            <Button label="Complete" severity="contrast" />
+                            <Button label="Get Certificate" severity="contrast"
+                                @click="router.push({ name: 'public.course.certificate' })" />
+                        </div>
                     </div>
                 </template>
             </Card>
@@ -76,17 +76,7 @@ const { data: nav } = getTopicNav(curr_topic_id)
         </main>
 
         <!-- Sidebar -->
-        <aside :class="[
-            'fixed lg:relative right-0 top-20 lg:top-0 w-3/4 lg:w-1/4 min-h-screen bg-gray-800 rounded-none lg:rounded-2xl transition-all duration-300 text-white flex flex-col overflow-y-auto',
-            'lg:transform-none',
-            is_sidebar_open ? 'transform translate-x-0' : 'transform translate-x-full lg:translate-x-0',
-            'z-40'
-        ]">
-            <div class="flex items-center p-4 gap-4">
-                <ListIcon class="w-6 h-6" />
-                <h2 class="text-2xl font-bold">Course content</h2>
-            </div>
-
+        <ISidebar :title-icon="ListIcon" :title="`Course Content`">
             <div class="flex-1 overflow-y-auto">
                 <Accordion :value="[0]" multiple class="px-3">
                     <AccordionPanel v-for="(chapter, index) in learning" :key="index" :value="index"
@@ -108,11 +98,7 @@ const { data: nav } = getTopicNav(curr_topic_id)
                     </AccordionPanel>
                 </Accordion>
             </div>
-        </aside>
-
-        <!-- Overlay -->
-        <div v-if="is_sidebar_open" @click="toggleSidebar" class="fixed inset-0 bg-gray-800/50 z-30 lg:hidden">
-        </div>
+        </ISidebar>
 
         <!-- Cindy Popover -->
         <div class="fixed z-50 bottom-6 right-4 md:right-8 lg:right-12">

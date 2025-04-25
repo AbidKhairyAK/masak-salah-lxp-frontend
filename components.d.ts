@@ -26,6 +26,8 @@ declare module 'vue' {
     IErrorMessage: typeof import('./src/components/IErrorMessage.vue')['default']
     IftaLabel: typeof import('primevue/iftalabel')['default']
     InputText: typeof import('primevue/inputtext')['default']
+    IOption: typeof import('./src/components/IOption.vue')['default']
+    ISidebar: typeof import('./src/components/ISidebar.vue')['default']
     Menubar: typeof import('primevue/menubar')['default']
     Message: typeof import('primevue/message')['default']
     MeterGroup: typeof import('primevue/metergroup')['default']

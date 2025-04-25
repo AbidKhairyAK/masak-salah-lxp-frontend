@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { computed, defineProps } from 'vue';
+import noImage from '@/assets/images/noimage.jpg';
 
-defineProps<{
+const props = defineProps<{
 	image: string;
 	title: string;
 	lessons: number;
 	practice: number;
 	instructor: string;
 }>();
+
+const imageSrc = computed(() => props.image || noImage);
+
 </script>
 
 <template>
@@ -15,7 +19,7 @@ defineProps<{
 		class="h-full transition-all duration-200 transform hover:-translate-y-1 !rounded-xl">
 		<template #header>
 			<div class="relative">
-				<img :src="image" :alt="title" class="w-full h-48 object-cover rounded-t-xl" />
+				<img :src="imageSrc" :alt="title" class="w-full h-48 object-cover rounded-t-xl" />
 			</div>
 		</template>
 		<template #title>

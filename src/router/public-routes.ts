@@ -12,6 +12,7 @@ const public_routes: RouteRecordRaw[] = [
 		],
 		meta: { requires_auth: true}
 	},
+	{ path: '/course/:id/certificate', 			name: 'public.course.certificate', 	component: () => import('@/views/public/certificate/CertificatePage.vue'), meta: { requires_auth: true}},
 	{ path: '/my-learning', 					name: 'public.my_learning',			component: () => import('@/views/public/my-learning/MyLearningPage.vue'),
 		meta: { requires_auth: true}
 	},

@@ -4,8 +4,10 @@ import { getCourseList } from '@/services/CourseService';
 import { useAuthStore } from '@/stores/auth-store';
 import { ArrowRight, BookOpenCheck } from 'lucide-vue-next';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore()
+const router = useRouter()
 const user = computed(() => authStore.currentUser)
 
 const { data: courses } = getCourseList();
@@ -30,7 +32,8 @@ const { data: courses } = getCourseList();
 						<template #content>
 							<div class="flex flex-col md:flex-row">
 								<div class="flex-1 mb-6 md:mr-6">
-									<span class="text-gray-600 text-base font-light">{{ course.instructor?.name }}</span>
+									<span class="text-gray-600 text-base font-light">{{ course.instructor?.name
+										}}</span>
 									<h2 class="text-lg font-bold mt-2">{{ course.title }}</h2>
 									<div class="text-sm text-gray-500 mt-1 mb-4">
 										<span>Course</span>
@@ -42,10 +45,17 @@ const { data: courses } = getCourseList();
 									</ProgressBar>
 								</div>
 								<div class="md:border-l border-gray-200 md:w-1/3 md:px-6 flex items-center">
-									<router-link :to="{name: 'public.course.lesson', params: { id: course.id, lesson_id: 6 }}" class="p-button text-lg font-bold w-full !px-4">
-										Continue
-										<ArrowRight class="w-4 h-4 ml-2" />
-									</router-link>
+									<div class="flex flex-col gap-2">
+										<router-link
+											:to="{ name: 'public.course.lesson', params: { id: course.id, lesson_id: 6 } }"
+											class="p-button text-lg font-bold w-full !px-4">
+											View
+											<ArrowRight class="w-4 h-4 ml-2" />
+										</router-link>
+										<IButton label="Get Certificate" severity="contrast"
+											@click="router.push({ name: 'public.course.certificate', params: {id: course.id} })" />
+									</div>
+
 								</div>
 							</div>
 						</template>
