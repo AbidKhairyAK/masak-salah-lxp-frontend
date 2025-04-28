@@ -24,7 +24,7 @@ watch(topic, (newVal) => {
       topic_id: newVal?.id || 0,
       lesson_id: newVal?.lesson?.id || 0,
       type: newVal?.lesson?.type || '',
-      video_url: newVal?.lesson?.video?.video_url || ''
+      video_url: newVal?.lesson?.video?.videoUrl || ''
     });
 });
 
@@ -32,8 +32,8 @@ watch(topic, (newVal) => {
 <template>
 	<div>
 		<StartSinglePracticePage :practiceId="topic?.practice?.id" :courseId="course_id" v-if="topic?.practice" />
-		<PdfLessonPage :url="topic?.lesson?.pdf.pdf_url" v-if="topic?.lesson?.pdf" />
+		<PdfLessonPage :url="topic?.lesson?.pdf.pdfUrl" v-if="topic?.lesson?.pdf" />
 		<ArticleLessonPage :content="topic?.lesson?.article.content" v-if="topic?.lesson?.article" />
-		<VideoLessonPage :url="topic?.lesson?.video.video_url" :title="topic?.title ?? ''" v-if="topic?.lesson?.video" />
+		<VideoLessonPage :url="topic?.lesson?.video.videoUrl" :title="topic?.title ?? ''" v-if="topic?.lesson?.video" />
 	</div>
 </template>

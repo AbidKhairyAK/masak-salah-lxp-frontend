@@ -3,7 +3,7 @@ import api from "./_api";
 
 export async function login(email: string, password: string) {
 	try {	
-		const url = '/login'
+		const url = 'auth/login'
 		const response = await api.post(url, {
 			email,
 			password
@@ -14,7 +14,6 @@ export async function login(email: string, password: string) {
 		}
 		return response.data
 	}catch(error) {
-		console.error('Login failed:', error);
     	throw error;
 	}
 
@@ -22,7 +21,7 @@ export async function login(email: string, password: string) {
 
 export async function logout() {
 	try{
-		const url = '/logout'
+		const url = 'auth/logout'
 		const authStore = useAuthStore()			
 		authStore.logout();
 		const response = await api.post(url);
@@ -45,7 +44,7 @@ export function getToken() {
 
 export async function register(name: string, email: string, password: string, passwordConfirmation: string) {
     try {
-        const url = '/register';
+        const url = 'auth/register';
         const response = await api.post(url, {
             name,
             email,
@@ -58,14 +57,13 @@ export async function register(name: string, email: string, password: string, pa
 		}
         return response.data;
     } catch (error) {
-        console.error('Registration failed:', error);
         throw error;
     }
 }
 
 export async function sendPasswordResetEmail(email: string) {
     try {
-        const url = '/forgot-password';
+        const url = 'auth/forgot-password';
         const response = await api.post(url, { email });
         return response.data;
     } catch (error) {

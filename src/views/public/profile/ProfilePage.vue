@@ -42,7 +42,7 @@ const copyURL = () => {
 				</template>
 			</Card>
 			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-			<div v-for="course in courses" :key="course.id" class="mb-4">
+			<div v-for="course in courses?.data" :key="course.id" class="mb-4">
 				<RouterLink :to="{ name: 'public.course.detail', params: { id: course.id } }">
 					<ICardCourse 
 						:image="course.image" 

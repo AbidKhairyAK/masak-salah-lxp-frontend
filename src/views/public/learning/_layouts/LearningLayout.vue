@@ -1,5 +1,5 @@
 <script setup>
-import { BotIcon, Circle, ListIcon, Menu, X } from 'lucide-vue-next';
+import { BotIcon, Circle, FileText, ListIcon, Menu, Square, X } from 'lucide-vue-next';
 import { getCourseStructure, getTopicNav } from '@/services/CourseService';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { computed, ref } from 'vue';
@@ -49,6 +49,19 @@ const toggleCindy = () => {
 //=== Nav Button ===
 const { data: nav } = getTopicNav(curr_topic_id)
 
+const openPanels = computed(() => {
+    if (!learning.value) return [0];
+    // Find all chapters that contain the current topic
+    const openIndexes = [];
+    learning.value.forEach((chapter, idx) => {
+        if (chapter.topics.some(topic => Number(curr_topic_id.value) === topic.id)) {
+            openIndexes.push(idx);
+        }
+    });
+    // Fallback to first panel if nothing matches
+    return openIndexes.length ? openIndexes : [0];
+});
+
 </script>
 
 <template>
@@ -78,7 +91,7 @@ const { data: nav } = getTopicNav(curr_topic_id)
         <!-- Sidebar -->
         <ISidebar :title-icon="ListIcon" :title="`Course Content`">
             <div class="flex-1 overflow-y-auto">
-                <Accordion :value="[0]" multiple class="px-3">
+                <Accordion :value="openPanels" multiple class="px-3">
                     <AccordionPanel v-for="(chapter, index) in learning" :key="index" :value="index"
                         class="!bg-gray-800 !border-none mt-3">
                         <AccordionHeader class="!bg-gray-800 !text-white">{{ chapter.title }}</AccordionHeader>
@@ -89,8 +102,11 @@ const { data: nav } = getTopicNav(curr_topic_id)
                                     <RouterLink :to="{ name: 'public.course.lesson', params: { lesson_id: topic.id } }"
                                         :class="['flex items-center cursor-pointer hover:bg-gray-700 p-2 rounded-xl w-full', Number(curr_topic_id) == topic.id ? 'bg-gray-700' : '']"
                                         @click="is_sidebar_open = false">
-                                        <Circle class="mr-2 w-5 h-5" stroke-width="1.5" />
-                                        <span>{{ topic.title }}</span>
+                                        <Square class="mr-2 w-4 h-4 shrink-0" stroke-width="3" />
+                                        <div>
+                                            <p>{{ topic.title }}</p>
+                                            <p class="text-xs font-extralight capitalize text-gray-400">{{ topic?.lesson?.type ?? 'practice'}}</p>
+                                        </div>
                                     </RouterLink>
                                 </div>
                             </div>

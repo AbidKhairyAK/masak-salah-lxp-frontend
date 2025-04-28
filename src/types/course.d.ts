@@ -1,9 +1,11 @@
 import type { Lesson } from "./lesson";
+import type { Meta } from "./meta";
 import type { Practice } from "./practice";
 
 interface Instructor {
   id: number;
   name: string;
+  email: string;
 }
 
 export interface Chapter {
@@ -15,7 +17,7 @@ export interface Chapter {
 export interface Topic {
   id: number;
   title?: string;
-  sort_order?: number;
+  sortOrder?: number;
   type?: string;
   lesson?: Lesson;
   practice?: Practice;
@@ -23,7 +25,7 @@ export interface Topic {
 
 export interface Course {
   id: number;
-  instructor_id: number;
+  instructorId: number;
   instructor?: Instructor;
   title: string;
   caption: string;
@@ -33,8 +35,6 @@ export interface Course {
   lesson_count?: number; 
   practice_count?: number; 
   chapters?: Chapter[]; 
-  created_at: string; 
-  updated_at: string;
 }
 
 export interface CourseCard {
@@ -50,4 +50,9 @@ export interface CoursePayload {
   title         : string,
   caption       : string,
   description   : string
+}
+
+export interface CoursePublicList {
+  data: Course[];
+  meta: Meta;
 }

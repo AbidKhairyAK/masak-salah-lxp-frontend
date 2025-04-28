@@ -1,5 +1,5 @@
 import useSWRV from "swrv";
-import type { Chapter, Course, CoursePayload, Topic } from "@/types/course";
+import type { Chapter, Course, CoursePayload, CoursePublicList, Topic } from "@/types/course";
 
 import fetcher from "./_fetcher";
 import api from "./_api";
@@ -8,7 +8,7 @@ import { computed, isRef, type ComputedRef, type Ref } from "vue";
 export function getCourseList () 
 {
   const url = "/courses";
-  return useSWRV <Course[]> (url, fetcher);
+  return useSWRV <CoursePublicList> (url, fetcher);
 }
 
 export function getCourseDetail ( id:number )
@@ -34,24 +34,14 @@ export function getCourseStructure ( id:number )
   return useSWRV <Chapter[]> (url, fetcher)
 }
 
-export function getTopicContent(id: ComputedRef<number>) {
-  const resolvedId = computed(() => {
-    if (isRef(id)) return id.value;
-    return id;
-  });
-  
-  const url = computed(() => `/topics/${resolvedId.value}/content`);
+export function getTopicContent(id: ComputedRef<number>) { 
+  const url = () => `/topics/${id.value}/content`;
   
   return useSWRV<Topic>(url, fetcher);
 }
 
-export function getTopicNav(id: ComputedRef<number>) {
-  const resolvedId = computed(() => {
-    if (isRef(id)) return id.value;
-    return id;
-  });
-  
-  const url = computed(() => `/topics/${resolvedId.value}/navigation`);
+export function getTopicNav(id: ComputedRef<number>) { 
+  const url = () => `/topics/${id.value}/navigation`;
   
   return useSWRV<Topic>(url, fetcher);
 }

@@ -27,7 +27,7 @@ const { data: courses } = getCourseList();
 		<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 			<!-- Course Cards Column -->
 			<div class="lg:col-span-2 space-y-6">
-				<div v-for="course in courses" :key="course.id" class="mb-4">
+				<div v-for="course in courses?.data" :key="course.id" class="mb-4">
 					<Card class="transition-all duration-200 transform hover:-translate-y-1 !rounded-xl">
 						<template #content>
 							<div class="flex flex-col md:flex-row">
