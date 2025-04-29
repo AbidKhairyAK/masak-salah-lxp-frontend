@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IButton from '@/components/IButton.vue';
-import { getCourseList } from '@/services/CourseService';
+import { getCourseByUserList, getCourseList } from '@/services/CourseService';
 import { useAuthStore } from '@/stores/auth-store';
 import { ArrowRight, BookOpenCheck } from 'lucide-vue-next';
 import { computed } from 'vue';
@@ -10,18 +10,18 @@ const authStore = useAuthStore()
 const router = useRouter()
 const user = computed(() => authStore.currentUser)
 
-const { data: courses } = getCourseList();
+const { data: courses } = getCourseByUserList();
 
 
 </script>
 <template>
 	<div class="max-w-screen-xl mx-auto px-4 py-16">
-		<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-16">
+		<div class="flex flex-row justify-between items-start md:items-center mb-16">
 			<div>
 				<h1 class="text-3xl font-bold mb-2">My Learning</h1>
 				<p class="text-md text-gray-700 flex-grow"></p>
 			</div>
-			<BookOpenCheck class="w-12 h-12" />
+			<BookOpenCheck class="w-12 h-12 " />
 		</div>
 		<!-- Main Grid Layout -->
 		<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -38,21 +38,20 @@ const { data: courses } = getCourseList();
 									<div class="text-sm text-gray-500 mt-1 mb-4">
 										<span>Course</span>
 										<span class="mx-2">•</span>
-										<span>34% selesai</span>
+										<span>{{course.enrollments?.[0]?.completionPercentage}}% selesai</span>
 									</div>
-
-									<ProgressBar :value="50" :showValue="false" class="max-h-2 !text-amber-200">
+									<ProgressBar :value="course.enrollments?.[0]?.completionPercentage" :showValue="false" class="max-h-2 !text-amber-200">
 									</ProgressBar>
 								</div>
 								<div class="md:border-l border-gray-200 md:w-1/3 md:px-6 flex items-center">
-									<div class="flex flex-col gap-2">
+									<div class="flex flex-col gap-2 w-full">
 										<router-link
 											:to="{ name: 'public.course.lesson', params: { id: course.id, lesson_id: 6 } }"
 											class="p-button text-lg font-bold w-full !px-4">
 											View
 											<ArrowRight class="w-4 h-4 ml-2" />
 										</router-link>
-										<IButton label="Get Certificate" severity="contrast"
+										<IButton label="Get Certificate" severity="contrast" v-if="course.enrollments?.[0]?.isCompleted"
 											@click="router.push({ name: 'public.course.certificate', params: {id: course.id} })" />
 									</div>
 

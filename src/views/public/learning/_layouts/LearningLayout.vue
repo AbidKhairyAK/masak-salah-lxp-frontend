@@ -1,5 +1,5 @@
 <script setup>
-import { BotIcon, Circle, FileText, ListIcon, Menu, Square, X } from 'lucide-vue-next';
+import { BotIcon, Circle, FileText, ListIcon, Menu, Square, SquareCheck, SquareCheckBig, X } from 'lucide-vue-next';
 import { getCourseStructure, getTopicNav } from '@/services/CourseService';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { computed, ref } from 'vue';
@@ -14,14 +14,22 @@ const route = useRoute()
 const course_id = Number(route.params.id)
 const curr_topic_id = computed(() => route.params.lesson_id)
 
-const is_sidebar_open = ref(false)
-const toggleSidebar = () => {
-    is_sidebar_open.value = !is_sidebar_open.value
-}
-
 const {
     data: learning
 } = getCourseStructure(course_id)
+
+const openPanels = computed(() => {
+    if (!learning.value) return [0];
+    // Find all chapters that contain the current topic
+    const openIndexes = [];
+    learning.value.forEach((chapter, idx) => {
+        if (chapter.topics.some(topic => Number(curr_topic_id.value) === topic.id)) {
+            openIndexes.push(idx);
+        }
+    });
+    // Fallback to first panel if nothing matches
+    return openIndexes.length ? openIndexes : [0];
+});
 //================
 
 
@@ -48,19 +56,6 @@ const toggleCindy = () => {
 
 //=== Nav Button ===
 const { data: nav } = getTopicNav(curr_topic_id)
-
-const openPanels = computed(() => {
-    if (!learning.value) return [0];
-    // Find all chapters that contain the current topic
-    const openIndexes = [];
-    learning.value.forEach((chapter, idx) => {
-        if (chapter.topics.some(topic => Number(curr_topic_id.value) === topic.id)) {
-            openIndexes.push(idx);
-        }
-    });
-    // Fallback to first panel if nothing matches
-    return openIndexes.length ? openIndexes : [0];
-});
 
 </script>
 
@@ -100,9 +95,11 @@ const openPanels = computed(() => {
                                 <div v-for="(topic, topicIndex) in chapter.topics" :key="topicIndex"
                                     class="py-2 flex justify-between items-center">
                                     <RouterLink :to="{ name: 'public.course.lesson', params: { lesson_id: topic.id } }"
-                                        :class="['flex items-center cursor-pointer hover:bg-gray-700 p-2 rounded-xl w-full', Number(curr_topic_id) == topic.id ? 'bg-gray-700' : '']"
-                                        @click="is_sidebar_open = false">
-                                        <Square class="mr-2 w-4 h-4 shrink-0" stroke-width="3" />
+                                        :class="['flex items-center cursor-pointer hover:bg-gray-700 p-2 rounded-xl w-full', Number(curr_topic_id) == topic.id ? 'bg-gray-700' : '']">
+                                        <div>
+                                            <SquareCheckBig class="mr-2 w-4 h-4 shrink-0 fill-primary" stroke-width="3" v-if="topic.topicUserHistories.length"/>
+                                            <Square class="mr-2 w-4 h-4 shrink-0" stroke-width="3" v-else/>
+                                        </div>
                                         <div>
                                             <p>{{ topic.title }}</p>
                                             <p class="text-xs font-extralight capitalize text-gray-400">{{ topic?.lesson?.type ?? 'practice'}}</p>

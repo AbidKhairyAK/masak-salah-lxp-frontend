@@ -39,7 +39,9 @@ export function getCurrentUser() {
 }
 
 export function getToken() {
-	return localStorage.getItem('token');
+	const tokenStr = localStorage.getItem('token');
+	if (tokenStr) return JSON.parse(tokenStr);
+	return null;
 }
 
 export async function register(name: string, email: string, password: string, passwordConfirmation: string) {

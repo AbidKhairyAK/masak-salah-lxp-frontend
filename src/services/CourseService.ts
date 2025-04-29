@@ -1,14 +1,22 @@
 import useSWRV from "swrv";
-import type { Chapter, Course, CoursePayload, CoursePublicList, Topic } from "@/types/course";
+import type { Course, CoursePayload, CoursePublicList } from "@/types/course";
 
 import fetcher from "./_fetcher";
 import api from "./_api";
 import { computed, isRef, type ComputedRef, type Ref } from "vue";
+import type { Chapter } from "@/types/chapter";
+import type { Topic } from "@/types/topic";
 
 export function getCourseList () 
 {
   const url = "/courses";
   return useSWRV <CoursePublicList> (url, fetcher);
+}
+
+export function getCourseByUserList ()
+{
+  const url = "/courses_user";
+  return useSWRV <CoursePublicList> (url, fetcher)
 }
 
 export function getCourseDetail ( id:number )
@@ -46,4 +54,4 @@ export function getTopicNav(id: ComputedRef<number>) {
   return useSWRV<Topic>(url, fetcher);
 }
 
-export default { getCourseList, getCourseDetail, createCourse, getCourseStructure };
+export default { getCourseList, getCourseByUserList, getCourseDetail, createCourse, getCourseStructure };

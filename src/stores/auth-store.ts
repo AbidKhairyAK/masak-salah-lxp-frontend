@@ -10,7 +10,8 @@ export const useAuthStore = defineStore('auth', {
 
 	getters: {
 		isAuthenticated: (state) => !!state.token,
-		currentUser: (state) => state.user
+		currentUser: (state) => state.user,
+		currentToken: (state) => state.token
 	},
 
 	actions: {
@@ -18,7 +19,7 @@ export const useAuthStore = defineStore('auth', {
 			this.user = userData.user;
 			this.token = userData.token;
 			localStorage.setItem('user', JSON.stringify(userData.user));
-			localStorage.setItem('token', String(userData.token));
+			localStorage.setItem('token', JSON.stringify(userData.token));
 		  },
 		logout() {
 			this.user = null;
